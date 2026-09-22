@@ -1,0 +1,73 @@
+@font-face {
+  font-family: Estedad;
+  src: url("/fonts/Estedad-wght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink: #1d1d1f;
+  --body: #6e6e73;
+  --canvas: #f5f5f7;
+  --canvas-soft: #ffffff;
+  --on-dark: #f5f5f7;
+  --brand: #0071e3;
+  --font-ui: Estedad, Tahoma, sans-serif;
+  --type-display: clamp(2.75rem, 8vw, 6rem);
+  --type-body: 1.125rem;
+  --page-max: 40rem;
+  --gutter: 2rem;
+  --space: 1.5rem;
+  --line-height-body: 1.55;
+  --track-display-rtl: -0.04em;
+  --track-display-ltr: -0.03em;
+  --weight-display: 800;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: var(--line-height-body);
+}
+
+.landing-page {
+  padding-block: var(--gutter);
+}
+
+h1 {
+  margin: 0;
+  font-size: var(--type-display);
+  font-weight: var(--weight-display);
+  line-height: 0.95;
+  letter-spacing: var(--track-display-rtl);
+}
+
+p {
+  margin: 0;
+  color: var(--body);
+}
+
+a {
+  color: var(--brand);
+}
+
+html[dir="ltr"] h1 {
+  letter-spacing: var(--track-display-ltr);
+}
+
+html[dir="rtl"] h1 {
+  letter-spacing: var(--track-display-rtl);
+}

@@ -1,0 +1,71 @@
+openapi: 3.1.0
+info:
+  title: Avaluna
+  version: 1.1.0
+  description: Iran commerce API (IRR, Jalali, ZarinPal). Secrets never in examples.
+servers:
+  - url: /api/services/v1
+  - url: /api/storefront/v1
+security:
+  - basicService: []
+components:
+  securitySchemes:
+    basicService:
+      type: http
+      scheme: basic
+      description: Service key_id:key_secret
+paths:
+  /health:
+    get:
+      summary: Health
+      security: []
+      responses:
+        "200": { description: db and adapter status }
+  /media:
+    post:
+      summary: Upload image (multipart field file)
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file: { type: string, format: binary }
+                alt: { type: string }
+      responses:
+        "201": { description: media id and src }
+  /reviews:
+    get:
+      summary: List reviews
+    post:
+      security: []
+      summary: Submit review (status pending)
+  /orders/{id}/invoice:
+    get:
+      summary: Jalali factor built from the order (Sheba, tax, rial)
+  /orders/{id}/moadian:
+    post:
+      summary: Submit to tax authority; 503 if enabled without URL/key
+  /backups:
+    get: { summary: List sqlite backups }
+    post: { summary: Copy sqlite into data/backups }
+  /cart:
+    get:
+      security: []
+      summary: Cart
+  /checkout:
+    post:
+      security: []
+      summary: Checkout
+  /payments/callback:
+    get:
+      security: []
+      summary: PSP return (failed payment restocks if stock was taken)
+  /auth/otp:
+    post:
+      security: []
+      summary: Request OTP
+  /legal:
+    get:
+      security: []
+      summary: Enamad Samandehi return_days
