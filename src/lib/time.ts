@@ -2,7 +2,7 @@ import { IRAN, TIME } from "../config/constants";
 
 export { slugify } from "../domain/slug";
 
-export function nowIso(timeZone = TIME.UTC): string {
+export function nowIso(timeZone: string = TIME.UTC): string {
   if (timeZone === TIME.UTC) {
     return new Date().toISOString();
   }

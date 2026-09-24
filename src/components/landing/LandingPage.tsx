@@ -54,7 +54,7 @@ export function LandingPage({ locale }: Props) {
               <SegmentedControl
                 size="xs"
                 value={locale}
-                onChange={(value) => router.push(localeSwitchHref(value as UiLocale))}
+                onChange={(value) => router.push(localeSwitchHref(value as UiLocale, "/intro"))}
                 data={[
                   { value: "fa", label: uiCopy(locale, "locale.fa") },
                   { value: "en", label: uiCopy(locale, "locale.en") },

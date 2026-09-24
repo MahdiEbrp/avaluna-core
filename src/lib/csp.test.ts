@@ -5,11 +5,16 @@ describe("csp", () => {
   it("document policy uses nonce and never unsafe-inline for scripts", () => {
     const nonce = "dGVzdA==";
     const policy = documentContentSecurityPolicy(nonce);
-    expect(policy).toContain(`'nonce-${nonce}'`);
-    expect(policy).toContain("'strict-dynamic'");
-    expect(policy).not.toContain("unsafe-inline");
+    const scriptSrc = policy.split("; ").find((part) => part.startsWith("script-src "));
+    const styleSrc = policy.split("; ").find((part) => part.startsWith("style-src "));
+    const styleSrcAttr = policy.split("; ").find((part) => part.startsWith("style-src-attr "));
+    expect(scriptSrc).toContain(`'nonce-${nonce}'`);
+    expect(scriptSrc).toContain("'strict-dynamic'");
+    expect(scriptSrc).not.toContain("unsafe-inline");
     expect(policy).not.toContain("unsafe-eval");
-    expect(policy).toContain("style-src-attr 'none'");
+    expect(styleSrc).toContain(`'nonce-${nonce}'`);
+    expect(styleSrc).not.toContain("unsafe-inline");
+    expect(styleSrcAttr).toBe("style-src-attr 'unsafe-inline'");
     expect(policy).toContain("script-src-attr 'none'");
     expect(policy).toContain("img-src 'self'");
     expect(policy).not.toContain("data:");

@@ -2,7 +2,7 @@ import { describe, expect, it, afterEach } from "vitest";
 import { createZarinpalAdapter } from "./payments/zarinpal";
 import { createKavenegarAdapter } from "./sms/kavenegar";
 import { createRestPspAdapter } from "./payments/rest-psp";
-import { getCarrierAdapter, getPaymentAdapter, getSmsAdapter } from "./registry";
+import { getPaymentAdapter, getSmsAdapter } from "./registry";
 import { resetAdapterHttp, setAdapterHttp } from "./http";
 import { defaultsMap, mergeSettings } from "../lib/settings/store";
 import { ApiError } from "../lib/errors";

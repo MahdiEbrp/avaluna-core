@@ -17,6 +17,7 @@ export function otherUiLocale(locale: UiLocale): UiLocale {
   return locale === "fa" ? "en" : "fa";
 }
 
-export function localeSwitchHref(target: UiLocale): string {
-  return `/?${UI.LANG_QUERY}=${target}`;
+export function localeSwitchHref(target: UiLocale, path = "/"): string {
+  const base = path.startsWith("/") ? path : `/${path}`;
+  return `${base}?${UI.LANG_QUERY}=${target}`;
 }

@@ -44,7 +44,12 @@ export async function completeSetup(input: unknown): Promise<{
   if (await isSetupComplete()) {
     throw new ApiError(409, "setup.already_complete", "Store is already initialized.");
   }
-  const draft: SetupDraft = parseSetupDraft(input);
+  let draft: SetupDraft;
+  try {
+    draft = parseSetupDraft(input);
+  } catch {
+    throw new ApiError(400, "setup.invalid_draft", "Setup draft is invalid.");
+  }
   const created = nowIso();
   const username = draft.operator_email.split("@")[0] || "operator";
   const passwordHash = await bcrypt.hash(draft.operator_password, SECURITY.PASSWORD_HASH_ROUNDS);

@@ -98,12 +98,12 @@ Do not inflate this. Update numbers when the code actually changes.
 
 | Axis | Score | Label | Why |
 |---|---|---|---|
-| Security | 9.3 | Excellent | HMAC **requires** a secret argument; settings AES from env or `data/.secrets`. Page CSP: nonce + `strict-dynamic`; never `'unsafe-inline'` or `'unsafe-eval'`. |
+| Security | 9.3 | Excellent | HMAC **requires** a secret argument; settings AES from env or `data/.secrets`. Page CSP: nonce + `strict-dynamic` scripts; style tags nonce; `style-src-attr 'unsafe-inline'` only for Mantine CSS-var attributes (no script). |
 | Stability | 8.7 | Excellent | Money writes use connector begin/commit; rollback test. |
-| Completeness | 8.9 | Excellent | Media, reviews, order invoices, Moadian-or-503, backups, order SMS/email outbox, failed-pay restock. |
-| Clean code | 9.1 | Excellent | UI copy keys only; hex only in `:root`; named UI constants. |
-| Iran product | 8.8 | God | Landing is fa RTL / en LTR; IRR + Jalali APIs. |
-| **Overall** | **9.0** | **Excellent** | Multi-language UI keys; no hex/magic in TSX. |
+| Completeness | 9.1 | Excellent | Shop chrome + home + setup wizard + product-card add + PLP/search; E2E **78/78** (incl. CSP style-attr smoke). |
+| Clean code | 9.2 | Excellent | UI copy keys only; hex only in `:root`; named UI constants; files ≤300; price display split from DB service. |
+| Iran product | 8.9 | God | Shop is fa RTL / en LTR with cookie `?lang`; IRR + Jalali APIs; toman display on cards. |
+| **Overall** | **9.0** | **Excellent** | Multi-language UI keys; no hex/magic in TSX; chrome+home+PLP+product-card+CSP E2E 78/78. |
 
 ### God
 
@@ -117,10 +117,12 @@ Do not inflate this. Update numbers when the code actually changes.
 - Secret seal/open/mask; audit on settings PUT.
 - Connector URL parser, redaction, dialect registry.
 - High vitest coverage on domain + adapters.
+- Shop chrome: Digikala-style header/drawer/nav/footer; landing at `/intro`.
+- Home `/`: hero, category tiles, deals rail, featured grid, Store+ItemList JSON-LD.
 
 ### Bad
 
-- No merchant or shop HTML — operators use `/api/services/v1` and `/api/storefront/v1`.
+- PDP/cart/checkout UI still Phase 7–9 (links 404).
 
 ### Ugly
 

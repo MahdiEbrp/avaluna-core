@@ -13,7 +13,7 @@ export function documentContentSecurityPolicy(nonce: string): string {
     `script-src 'strict-dynamic' ${nonceSource(nonce)}`,
     "script-src-attr 'none'",
     `style-src 'self' ${nonceSource(nonce)}`,
-    "style-src-attr 'none'",
+    "style-src-attr 'unsafe-inline'",
     "img-src 'self'",
     "font-src 'self'",
     "connect-src 'self'",

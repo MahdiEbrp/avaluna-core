@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gte, like, lte, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gte, inArray, like, lte, sql } from "drizzle-orm";
 import { fromMinorUnits, toMinorUnits } from "../../domain/money";
 import { moneyProfile } from "../money/profile";
 import { loadSettings } from "../settings/store";
@@ -146,6 +146,31 @@ export async function listProducts(search: URLSearchParams) {
   const maxPrice = search.get("max_price");
   if (maxPrice) {
     filters.push(lte(products.regularPriceCents, toMinorUnits(maxPrice)));
+  }
+  const visibility = search.get("catalog_visibility");
+  if (visibility) {
+    filters.push(eq(products.catalogVisibility, visibility));
+  }
+  const categorySlug = search.get("category");
+  if (categorySlug) {
+    const categoryRows = await db
+      .select({ id: categories.id })
+      .from(categories)
+      .where(eq(categories.slug, categorySlug))
+      .limit(1);
+    const categoryId = categoryRows[0]?.id;
+    if (categoryId === undefined) {
+      return { data: [], total: 0, page, pageSize, perPage: pageSize };
+    }
+    const linkRows = await db
+      .select({ productId: productCategories.productId })
+      .from(productCategories)
+      .where(eq(productCategories.categoryId, categoryId));
+    const productIds = linkRows.map((row) => row.productId);
+    if (productIds.length === 0) {
+      return { data: [], total: 0, page, pageSize, perPage: pageSize };
+    }
+    filters.push(inArray(products.id, productIds));
   }
 
   const where = filters.length ? and(...filters) : undefined;

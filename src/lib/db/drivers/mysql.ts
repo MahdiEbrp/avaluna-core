@@ -12,7 +12,8 @@ export function openMysqlConnector(parsed: ParsedDatabaseUrl): DatabaseConnector
   const query = async (sql: string, args: readonly unknown[]) => {
     if (!conn) {
       try {
-        const mod = (await import(/* webpackIgnore: true */ "mysql2/promise")) as {
+        const specifier = "mysql2/promise";
+        const mod = (await import(/* webpackIgnore: true */ specifier)) as {
           createConnection: (url: string) => Promise<MysqlConn>;
         };
         conn = await mod.createConnection(parsed.raw);

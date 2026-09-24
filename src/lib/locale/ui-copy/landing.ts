@@ -1,17 +1,6 @@
-import type { UiLocale } from "../../domain/ui-locale";
+import type { UiLocale } from "../../../domain/ui-locale";
 
-const FA: Record<string, string> = {
-  "meta.title": "آوالونا | Avaluna",
-  "meta.description": "تجارت الکترونیک API-first برای ایران",
-  "nav.brand": "آوالونا",
-  "nav.features": "قابلیت‌ها",
-  "nav.flow": "مسیر سفارش",
-  "nav.api": "وب‌سرویس",
-  "nav.faq": "پرسش‌ها",
-  "nav.locale": "زبان",
-  "locale.fa": "فارسی",
-  "locale.en": "English",
-  "landing.switch": "English",
+export const landingFa = {
   "hero.kicker": "API-first",
   "hero.title": "فروش در ایران، بدون فروشگاه آماده",
   "hero.lede": "کاتالوگ، سبد، زرین‌پال، موجودی و پیامک — ریال در انبار، تومان روی فاکتور، جلالی برای فروشنده.",
@@ -64,20 +53,9 @@ const FA: Record<string, string> = {
   "faq.tax.q": "مودیان چیست؟",
   "faq.tax.a": "اگر روشن باشد و کلید نباشد، پاسخ ۵۰۳ است — موفقیت جعلی نیست.",
   "footer.legal": "اینماد و ساماندهی در تنظیمات قانونی ذخیره می‌شوند.",
-};
+} as const satisfies Record<string, string>;
 
-const EN: Record<string, string> = {
-  "meta.title": "Avaluna | آوالونا",
-  "meta.description": "API-first commerce for Iran",
-  "nav.brand": "Avaluna",
-  "nav.features": "Capabilities",
-  "nav.flow": "Order path",
-  "nav.api": "API",
-  "nav.faq": "FAQ",
-  "nav.locale": "Language",
-  "locale.fa": "فارسی",
-  "locale.en": "English",
-  "landing.switch": "فارسی",
+export const landingEn = {
   "hero.kicker": "API-first",
   "hero.title": "Sell in Iran without a canned storefront",
   "hero.lede": "Catalog, cart, ZarinPal, stock and SMS — rials in storage, toman on the invoice, Jalali for the merchant.",
@@ -130,10 +108,9 @@ const EN: Record<string, string> = {
   "faq.tax.q": "What about Moadian?",
   "faq.tax.a": "If enabled without a key, the API returns 503 — never fake success.",
   "footer.legal": "E-Namad and Samandehi codes live in legal settings.",
+} as const satisfies Record<string, string>;
+
+export const LANDING: Record<UiLocale, Record<string, string>> = {
+  fa: landingFa,
+  en: landingEn,
 };
-
-const CATALOG: Record<UiLocale, Record<string, string>> = { fa: FA, en: EN };
-
-export function uiCopy(locale: UiLocale, key: string): string {
-  return CATALOG[locale][key] ?? CATALOG.fa[key] ?? key;
-}

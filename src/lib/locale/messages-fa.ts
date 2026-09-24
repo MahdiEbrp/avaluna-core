@@ -14,6 +14,10 @@ export const MESSAGE_FA: Record<string, string> = {
   "moadian.unconfigured": "سامانه مودیان روشن است ولی نشانی یا کلید تنظیم نشده.",
   "moadian.submit_failed": "سامانه مودیان فاکتور را نپذیرفت.",
   "backup.unsupported_dialect": "پشتیبان پرونده فقط برای اسکیوالایت است.",
+  "setup.already_complete": "فروشگاه قبلاً راه‌اندازی شده است.",
+  "setup.invalid_draft": "اطلاعات راه‌اندازی نامعتبر است.",
+  "setup.operator_failed": "حساب مدیر ساخته نشد.",
+  "setup.method_not_allowed": "فقط GET یا POST برای راه‌اندازی مجاز است.",
 };
 
 export function messageFa(code: string): string | null {

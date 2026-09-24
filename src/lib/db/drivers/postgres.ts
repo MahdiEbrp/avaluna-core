@@ -7,7 +7,8 @@ export function openPostgresConnector(parsed: ParsedDatabaseUrl): DatabaseConnec
   const query = async (sql: string, args: readonly unknown[]) => {
     if (!pool) {
       try {
-        const mod = (await import(/* webpackIgnore: true */ "postgres")) as {
+        const specifier = "postgres";
+        const mod = (await import(/* webpackIgnore: true */ specifier)) as {
           default: (url: string, opts?: object) => {
             unsafe: (text: string, values?: unknown[]) => Promise<Record<string, unknown>[]>;
           };

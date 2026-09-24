@@ -160,7 +160,12 @@ export async function searchCatalog(query: string) {
       sql: "SELECT rowid FROM products_fts WHERE products_fts MATCH ? LIMIT 50",
       args: [ftsMatchQuery(query)],
     });
-    const ids = fts.rows.map((row) => Number((row as { rowid?: number }).rowid ?? (row as unknown[])[0]));
+    const ids = fts.rows.map((row) => {
+      const asRecord = row as Record<string, unknown>;
+      if (asRecord.rowid !== undefined) return Number(asRecord.rowid);
+      const values = Object.values(asRecord);
+      return Number(values[0]);
+    });
     if (ids.length) {
       const rows = await db.select().from(products);
       return rows

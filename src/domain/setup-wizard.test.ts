@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { SETUP, UI } from "../config/constants";
-import { emptySetupDraft, parseSetupDraft, setupProgressPercent, setupStepId, canAdvanceSetup } from "./setup-wizard";
+import {
+  canAdvanceSetup,
+  emptySetupDraft,
+  parseSetupDraft,
+  setupProgressPercent,
+  setupStepId,
+} from "./setup-wizard";
 
 describe("setup wizard", () => {
   it("parses drafts, clamps steps, and maps progress tokens", () => {
@@ -20,5 +26,23 @@ describe("setup wizard", () => {
         operator_password: "ChangeMeNow!",
       }).store_name_fa,
     ).toBe("آوالونا");
+  });
+
+  it("gates step advance from draft completeness", () => {
+    const empty = emptySetupDraft();
+    expect(canAdvanceSetup(SETUP.FIRST_STEP, empty)).toBe(true);
+    expect(canAdvanceSetup(1, { ...empty, store_name: "", store_name_fa: "", city: "" })).toBe(false);
+    expect(canAdvanceSetup(1, { ...empty, store_name: "S", store_name_fa: "فروشگاه", city: "Tehran" })).toBe(true);
+    const operator = { ...empty, operator_name: "", operator_email: "", operator_password: "" };
+    expect(canAdvanceSetup(2, operator)).toBe(false);
+    expect(
+      canAdvanceSetup(2, {
+        ...empty,
+        operator_name: "Ops",
+        operator_email: "ops@avaluna.ir",
+        operator_password: "ChangeMeNow!",
+      }),
+    ).toBe(true);
+    expect(canAdvanceSetup(SETUP.LAST_STEP, empty)).toBe(true);
   });
 });

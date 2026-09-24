@@ -100,6 +100,26 @@ export const UI = {
   HEADER_HEIGHT: 56,
   NAVBAR_WIDTH: 220,
   TIMELINE_BULLET: 20,
+  PAGE_MAX: "40rem",
+  PRODUCT_GRID: { BASE: 1, SM: 2, MD: 3, LG: 4 } as const,
+  SEARCH: { MAX_LENGTH: 80, DEBOUNCE_MS: 250 } as const,
+  CART: { BADGE_MAX: 99 } as const,
+  WIZARD: { MIN_PASSWORD: SECURITY.PASSWORD_MIN_LENGTH } as const,
+  OTP: { MOBILE_LENGTH: 11, CODE_LENGTH: 5 } as const,
+  FOCUS: { OUTLINE_WIDTH: 2, OUTLINE_OFFSET: 2 } as const,
+  SKIP_LINK_ID: "main-content",
+  TOUCH_TARGET_MIN: 44,
+  CART_TOKEN_STORAGE: "avaluna_cart_token",
+  CART_NONCE_STORAGE: "avaluna_cart_nonce",
+  NAV_BREAKPOINT: "md",
+  BURGER_BREAKPOINT: "sm",
+  HOME: { SECTION_LIMIT: 8, CATEGORY_LIMIT: 12, TITLE_ORDER: 2 } as const,
+  PLP: {
+    PAGE_SIZE: 12,
+    SKELETON_COUNT: 8,
+    SORT_DEFAULT: "newest",
+    FILTER_A11Y: "plp.filters",
+  } as const,
 } as const;
 
 export const HTTP = {
