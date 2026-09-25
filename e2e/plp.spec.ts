@@ -1,4 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { useUniqueClientIp } from "./support";
+
+test.beforeEach(async ({ page }, testInfo) => {
+  useUniqueClientIp(page, testInfo);
+});
 
 test.describe("plp / search", () => {
   test("products page: h1, cards, crawlable sort + pagination", async ({ page }) => {

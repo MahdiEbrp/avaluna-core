@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { UI } from "../../config/constants";
 import type { UiLocale } from "../../domain/ui-locale";
 import { uiCopy } from "../../lib/locale/ui-copy";
-import { CartProvider } from "./CartProvider";
 import { BottomNav } from "./BottomNav";
 import { ShopFooter, type LegalInfo } from "./ShopFooter";
 import { ShopHeader } from "./ShopHeader";
@@ -20,7 +19,7 @@ type Props = {
 export function ShopShell({ locale, categories, legal, children }: Props) {
   const t = (key: string) => uiCopy(locale, key);
   return (
-    <CartProvider>
+    <>
       <a className="skip-link" href={`#${UI.SKIP_LINK_ID}`} data-testid="skip-link">
         {t("shop.a11y.skip")}
       </a>
@@ -39,7 +38,7 @@ export function ShopShell({ locale, categories, legal, children }: Props) {
         <ShopFooter locale={locale} legal={legal} />
         <BottomNav locale={locale} />
       </div>
-    </CartProvider>
+    </>
   );
 }
 

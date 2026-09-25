@@ -5,6 +5,7 @@ import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { UI } from "../config/constants";
 import { mantineTheme } from "../lib/mantine-theme";
+import { CartProvider } from "./shop/CartProvider";
 
 type Props = {
   nonce: string;
@@ -20,7 +21,7 @@ export function AppProviders({ nonce, children }: Props) {
       getStyleNonce={() => nonce}
     >
       <Notifications />
-      {children}
+      <CartProvider>{children}</CartProvider>
     </MantineProvider>
   );
 }

@@ -1,4 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { useUniqueClientIp } from "./support";
+
+test.beforeEach(async ({ page }, testInfo) => {
+  useUniqueClientIp(page, testInfo);
+});
 
 test.describe("product card add to cart", () => {
   test("add from home updates cart badge", async ({ page }) => {

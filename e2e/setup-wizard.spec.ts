@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { createClient } from "@libsql/client";
+import { useUniqueClientIp } from "./support";
 
 const dbUrl = process.env.DATABASE_URL ?? "file:data/avaluna.sqlite";
 
@@ -33,6 +34,10 @@ async function walkToReview(page: Page, email: string) {
   await page.getByTestId("setup.next").click();
   await expect(page.getByTestId("setup.review.summary")).toBeVisible();
 }
+
+test.beforeEach(async ({ page }, testInfo) => {
+  useUniqueClientIp(page, testInfo);
+});
 
 test.describe("setup wizard", () => {
   test.beforeEach(async () => {

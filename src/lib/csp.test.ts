@@ -22,9 +22,10 @@ describe("csp", () => {
     expect(policy).toContain("frame-ancestors 'none'");
   });
 
-  it("api policy has no unsafe-inline", () => {
+  it("api policy has no unsafe-inline or unsafe-eval", () => {
     const policy = apiContentSecurityPolicy();
     expect(policy).not.toContain("unsafe-inline");
+    expect(policy).not.toContain("unsafe-eval");
     expect(policy).toContain("default-src 'none'");
   });
 

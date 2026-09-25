@@ -98,12 +98,12 @@ Do not inflate this. Update numbers when the code actually changes.
 
 | Axis | Score | Label | Why |
 |---|---|---|---|
-| Security | 9.3 | Excellent | HMAC **requires** a secret argument; settings AES from env or `data/.secrets`. Page CSP: nonce + `strict-dynamic` scripts; style tags nonce; `style-src-attr 'unsafe-inline'` only for Mantine CSS-var attributes (no script). |
+| Security | 9.4 | Excellent | HMAC **requires** a secret argument; settings AES from env or `data/.secrets`. Page CSP: nonce + `strict-dynamic` scripts; style tags nonce; `style-src-attr 'unsafe-inline'` only for Mantine CSS-var attributes (no script). E2E smoke asserts **no `unsafe-eval`** and empty script-side violations. |
 | Stability | 8.7 | Excellent | Money writes use connector begin/commit; rollback test. |
-| Completeness | 9.1 | Excellent | Shop chrome + home + setup wizard + product-card add + PLP/search; E2E **78/78** (incl. CSP style-attr smoke). |
+| Completeness | 9.4 | Excellent | Shop chrome + home + setup + product-card + PLP/search + **PDP** + **cart `/cart`**; E2E **108/108** (incl. PDP, cart honesty retry + CSP no-eval). |
 | Clean code | 9.2 | Excellent | UI copy keys only; hex only in `:root`; named UI constants; files ≤300; price display split from DB service. |
-| Iran product | 8.9 | God | Shop is fa RTL / en LTR with cookie `?lang`; IRR + Jalali APIs; toman display on cards. |
-| **Overall** | **9.0** | **Excellent** | Multi-language UI keys; no hex/magic in TSX; chrome+home+PLP+product-card+CSP E2E 78/78. |
+| Iran product | 8.9 | God | Shop is fa RTL / en LTR with cookie `?lang`; IRR + Jalali APIs; toman display on cards; COD note on buy box. |
+| **Overall** | **9.1** | **Excellent** | Multi-language UI keys; no hex/magic in TSX; chrome+home+PLP+PDP+cart + no-eval E2E 108/108. |
 
 ### God
 
@@ -119,10 +119,12 @@ Do not inflate this. Update numbers when the code actually changes.
 - High vitest coverage on domain + adapters.
 - Shop chrome: Digikala-style header/drawer/nav/footer; landing at `/intro`.
 - Home `/`: hero, category tiles, deals rail, featured grid, Store+ItemList JSON-LD.
+- PDP `/products/[slug]`: gallery, buy box (COD note), tabs, reviews form, related, crumbs, Product JSON-LD.
+- Cart `/cart`: mobile cards / desktop table, qty + remove (nonce), coupon apply/remove, API totals, honest load-error Alert + retry (a 429 never renders as "empty cart").
 
 ### Bad
 
-- PDP/cart/checkout UI still Phase 7–9 (links 404).
+- Checkout + OTP UI still Phase 9 — the cart CTA links to `/checkout`, which 404s until that phase lands. SEO hardening (Phase 10) pending.
 
 ### Ugly
 

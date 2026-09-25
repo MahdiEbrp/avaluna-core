@@ -103,7 +103,13 @@ export const UI = {
   PAGE_MAX: "40rem",
   PRODUCT_GRID: { BASE: 1, SM: 2, MD: 3, LG: 4 } as const,
   SEARCH: { MAX_LENGTH: 80, DEBOUNCE_MS: 250 } as const,
-  CART: { BADGE_MAX: 99 } as const,
+  CART: {
+    BADGE_MAX: 99,
+    LINE_QTY_MIN: 1,
+    LINE_QTY_MAX: 99,
+    SKELETON_LINES: 3,
+    COUPON_MAX_LENGTH: 40,
+  } as const,
   WIZARD: { MIN_PASSWORD: SECURITY.PASSWORD_MIN_LENGTH } as const,
   OTP: { MOBILE_LENGTH: 11, CODE_LENGTH: 5 } as const,
   FOCUS: { OUTLINE_WIDTH: 2, OUTLINE_OFFSET: 2 } as const,
@@ -119,6 +125,14 @@ export const UI = {
     SKELETON_COUNT: 8,
     SORT_DEFAULT: "newest",
     FILTER_A11Y: "plp.filters",
+  } as const,
+  PDP: {
+    RELATED_LIMIT: 4,
+    QTY_MIN: 1,
+    QTY_MAX: 99,
+    REVIEW_TEXT_MAX: 2000,
+    REVIEW_NAME_MAX: 80,
+    REVIEW_EMAIL_MAX: 120,
   } as const,
 } as const;
 

@@ -13,9 +13,10 @@ type Props = {
   productId: number;
   outOfStock: boolean;
   compact?: boolean;
+  testId?: string;
 };
 
-export function AddToCartButton({ locale, productId, outOfStock, compact = false }: Props) {
+export function AddToCartButton({ locale, productId, outOfStock, compact = false, testId = "product.add" }: Props) {
   const t = (key: string) => uiCopy(locale, key);
   const { refresh } = useCart();
   const [pending, setPending] = useState(false);
@@ -50,7 +51,7 @@ export function AddToCartButton({ locale, productId, outOfStock, compact = false
       disabled={disabled}
       loading={pending}
       onClick={() => void handleClick()}
-      data-testid="product.add"
+      data-testid={testId}
       aria-label={label}
     >
       {label}

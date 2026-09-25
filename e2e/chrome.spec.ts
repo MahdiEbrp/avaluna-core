@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { useUniqueClientIp } from "./support";
 
 const VIEW = {
   mobile: { width: 390, height: 844 },
@@ -12,6 +13,10 @@ async function expectCookieLocale(page: Page, value: string) {
   const locale = cookies.find((cookie) => cookie.name === "avaluna_locale");
   expect(locale?.value).toBe(value);
 }
+
+test.beforeEach(async ({ page }, testInfo) => {
+  useUniqueClientIp(page, testInfo);
+});
 
 test.describe("shop chrome", () => {
   test("skip-link focuses main", async ({ page }) => {
